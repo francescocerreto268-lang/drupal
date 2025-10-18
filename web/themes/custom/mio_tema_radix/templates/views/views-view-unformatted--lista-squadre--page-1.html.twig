@@ -58,6 +58,24 @@ default_row_class ? 'views-row view-row-match',
     <h3>
         {{ _entity.title.value }}
     </h3>
+  <div> {{ _entity.field_nome.value }} </div>
+  <div> {{ _entity.field_stadio.value }} </div>
+
+  {% if _entity.field_image.target_id %}
+    {% set file = drupal_entity('file', _entity.field_image.target_id) %}
+        <img 
+        src="{{ file_url(file['#file'].uri.value) }}" 
+        alt="{{ _entity.field_image.value[0].alt }}" 
+        class="img-fluid rounded"
+        >
+  {% endif %}
+
+{% if  _entity.field_rosa.value[0].uri %}
+
+
+ <div>   <a href="{{_entity.field_rosa.value[0].uri}}" target="_blank">  link alla rosa </a> </div>
+{% endif %}
+
 
     </div>
     {% endfor %}
