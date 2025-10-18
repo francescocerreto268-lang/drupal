@@ -1,0 +1,5 @@
+# Schema for the configuration files of the mio_tema_radix theme.
+
+mio_tema_radix.settings:
+  type: theme_settings
+  label: 'mio_tema_radix settings'

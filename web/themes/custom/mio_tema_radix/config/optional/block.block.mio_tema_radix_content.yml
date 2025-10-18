@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - mio_tema_radix
+id: mio_tema_radix_content
+theme: mio_tema_radix
+region: content
+weight: -5
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: "Main page content"
+  label_display: "0"
+  provider: system
+visibility: {}
