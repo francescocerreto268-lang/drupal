@@ -1,0 +1,15 @@
+my_user_display.content:
+  path: '/user/display'
+  defaults:
+    _controller: '\Drupal\my_user_display\Controller\UserDisplayController::displayUser'
+    _title: 'Utente loggato'
+  requirements:
+    _permission: 'access content'
+
+my_user_display.distance:
+  path: '/user/distance/{lat1}/{lon1}/{lat2}/{lon2}'
+  defaults:
+    _controller: '\Drupal\my_user_display\Controller\UserDisplayController::calculateDistance'
+    _title: 'Calcola distanza'
+  requirements:
+    _permission: 'access content'

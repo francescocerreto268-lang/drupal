@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Funzioni hook del tema Mio Tema.
+ */
+
+/**
+ * Preprocess della pagina.
+ */
+function mio_tema_preprocess_page(array &$variables) {
+  // Aggiunge una variabile custom per Twig
+  $variables['messaggio_benvenuto'] = 'Benvenuto nel mio tema custom!';
+}

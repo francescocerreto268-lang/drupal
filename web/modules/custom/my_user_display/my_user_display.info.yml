@@ -1,0 +1,7 @@
+name: 'My User Display'
+type: module
+description: 'Mostra lo username dell’utente loggato tramite un controller personalizzato.'
+package: Custom
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - drupal:user

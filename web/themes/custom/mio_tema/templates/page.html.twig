@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <head-placeholder token="{{ head_placeholder|raw }}">
+    <title>{{ head_title }}</title>
+    {{ attach_library('mio_tema/global-styling') }}
+  </head>
+  <body>
+    <header>
+  <h1>{{ messaggio_benvenuto }}</h1>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu-list">
+    ☰ Menu
+  </button>
+
+  <nav id="main-menu-list" class="custom-main-nav primary-nav" role="navigation" aria-label="{{ 'Main navigation'|t }}">
+    {{ page.primary_menu }}
+  </nav>
+</header>
+
+
+    <main>{{ page.content }}</main>
+
+    <aside>{{ page.sidebar_first }}</aside>
+
+    <footer>{{ page.footer }}</footer>
+  </body>
+</html>

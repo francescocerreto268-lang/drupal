@@ -1,0 +1,86 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function my_user_display_entity_presave(EntityInterface $entity) {
+  // Applica solo al content type "partite".
+  if ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'partite') {
+
+    // Ottieni indirizzo del match.
+    $indirizzo_match = $entity->get('field_indirizzo')->value ?? '';
+
+    // Ottieni l'utente arbitro referenziato.
+    if (!$entity->get('field_arbitro')->isEmpty()) {
+      $arbitro_user = $entity->get('field_arbitro')->entity;
+      $indirizzo_arbitro = $arbitro_user->get('field_indirizzo')->value ?? '';
+
+      // Geocoding degli indirizzi.
+      $coord_match = _my_user_display_geocode_address($indirizzo_match);
+      $coord_arbitro = _my_user_display_geocode_address($indirizzo_arbitro);
+
+      if ($coord_match && $coord_arbitro) {
+        // Calcolo distanza (Haversine formula).
+        $R = 6371; // Raggio della Terra in km.
+        $dLat = deg2rad($coord_arbitro['lat'] - $coord_match['lat']);
+        $dLon = deg2rad($coord_arbitro['lon'] - $coord_match['lon']);
+        $a = sin($dLat / 2) ** 2 + cos(deg2rad($coord_match['lat'])) * cos(deg2rad($coord_arbitro['lat'])) * sin($dLon / 2) ** 2;
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $distanza = $R * $c;
+
+        // Calcola pagamento (0.3 €/km).
+        $pagamento = $distanza * 0.3;
+        $entity->set('field_pagamento', round($pagamento, 2));
+      }
+    }
+  }
+}
+
+/**
+ * Converte un indirizzo reale in coordinate (lat/lon) usando OpenStreetMap Nominatim API.
+ */
+function _my_user_display_geocode_address($address) {
+  if (empty($address)) {
+    return NULL;
+  }
+
+  // Cache per evitare chiamate ripetute.
+  $cache_id = 'my_user_display_geocode:' . md5($address);
+  $cache = \Drupal::cache()->get($cache_id);
+  if ($cache && !empty($cache->data)) {
+    return $cache->data;
+  }
+
+  $encoded_address = urlencode($address);
+  $url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q={$encoded_address}";
+
+  try {
+    $client = \Drupal::httpClient();
+    $response = $client->get($url, [
+      'headers' => [
+        'User-Agent' => 'DrupalGeocodeExample/1.0 (+https://ddev.site)',
+      ],
+      'timeout' => 8,
+    ]);
+
+    $data = json_decode($response->getBody(), TRUE);
+
+    if (!empty($data[0]['lat']) && !empty($data[0]['lon'])) {
+      $coords = [
+        'lat' => (float) $data[0]['lat'],
+        'lon' => (float) $data[0]['lon'],
+      ];
+
+      // Cache per 1 giorno.
+      \Drupal::cache()->set($cache_id, $coords, time() + 86400);
+      return $coords;
+    }
+
+  } catch (\Exception $e) {
+    \Drupal::logger('my_user_display')->error('Errore nel geocoding: @msg', ['@msg' => $e->getMessage()]);
+  }
+
+  return NULL;
+}

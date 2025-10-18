@@ -1,0 +1,26 @@
+{#
+  Override del menu principale con toggle mobile.
+#}
+
+<nav class="primary-nav custom-main-nav" role="navigation" aria-label="{{ 'Main navigation'|t }}">
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu-list">
+    ☰ Menu
+  </button>
+
+  <ul id="main-menu-list" class="menu menu--level-1">
+    {% for item in items %}
+      <li{{ item.attributes.addClass('menu__item') }}>
+        {{ link(item.title, item.url, { 'class': ['menu__link'] }) }}
+        {% if item.below %}
+          <ul class="submenu">
+            {% for sub_item in item.below %}
+              <li{{ sub_item.attributes.addClass('menu__item') }}>
+                {{ link(sub_item.title, sub_item.url, { 'class': ['menu__link'] }) }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

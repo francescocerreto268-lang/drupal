@@ -1,0 +1,11 @@
+name: Mio Tema
+type: theme
+description: 'Tema personalizzato di esempio'
+core_version_requirement: ^11
+base theme: olivero
+libraries:
+  - mio_tema/global-styling
+regions:
+  header: 'Header'
+  content: 'Content'
+  footer: 'Footer'

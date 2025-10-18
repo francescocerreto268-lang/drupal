@@ -1,0 +1,3 @@
+services:
+  my_user_display.default:
+    class: Drupal\my_user_display\Controller\UserDisplayController
