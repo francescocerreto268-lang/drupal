@@ -54,7 +54,11 @@ default_row_class ? 'views-row view-row-match',
 
 {% set _entity = row.content['#row']._entity %}
 <div{{row.attributes.addClass(row_classes)}}>
-    {{- row.content -}}
-</div>
+
+    <h3>
+        {{ _entity.title.value }}
+    </h3>
+
+    </div>
     {% endfor %}
     {% endblock %}

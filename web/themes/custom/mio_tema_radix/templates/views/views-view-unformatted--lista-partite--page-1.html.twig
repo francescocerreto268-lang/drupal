@@ -54,7 +54,21 @@ default_row_class ? 'views-row view-row-match',
 
 {% set _entity = row.content['#row']._entity %}
 <div{{row.attributes.addClass(row_classes)}}>
-    {{- row.content -}}
-</div>
+
+    <h3>
+        {{ _entity.title.value }}
+    </h3>
+
+    <div> 
+        <strong>{{ _entity.field_squadra_1.entity.field_nome.value }}</strong> VS 
+        <strong>{{
+            _entity.field_squadra_2.entity.field_nome.value }}</strong> 
+    </div>
+
+    <div> {{ _entity.field_indirizzo.value }}</div>
+    <div> {{ _entity.field_dara_e_ora.value | date('d/m/Y H:i') }}</div>
+
+    <div> {{ _entity.field_arbitro.entity.field_nome.value | capitalize   }} {{ _entity.field_arbitro.entity.field_cognome.value  | capitalize    }} </div>
+    </div>
     {% endfor %}
     {% endblock %}
