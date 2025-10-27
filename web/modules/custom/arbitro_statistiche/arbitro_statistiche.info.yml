@@ -1,0 +1,5 @@
+name: Statistiche Arbitri
+description: 'Modulo per visualizzare le statistiche degli arbitri'
+type: module
+core_version_requirement: ^11
+package: Custom

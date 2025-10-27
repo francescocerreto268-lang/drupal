@@ -1,0 +1,28 @@
+{% include 'radix:user' %}
+{{ attach_library('mio_tema_radix/login-form') }}
+<form{{ attributes.addClass('user-login-form') }}>
+  {# Campi username e password #}
+  <div class="form-group">
+    {{ element.name }}
+  </div>
+  
+  <div class="form-group">
+    {{ element.pass }}
+  </div>
+  
+  {# Campi hidden #}
+  {{ element.form_build_id }}
+  {{ element.form_id }}
+  {{ element.actions }}
+  
+  {# Reset Password Link - DENTRO il form #}
+  <div class="login-links">
+    <ul>
+      <li>
+        <a href="/user/password" title="Send password reset instructions via email." class="request-password-link">
+          Reset your password
+        </a>
+      </li>
+    </ul>
+  </div>
+</form>

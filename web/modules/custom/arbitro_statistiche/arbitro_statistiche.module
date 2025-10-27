@@ -1,0 +1,113 @@
+<?php
+
+/**
+ * @file
+ * Modulo per le statistiche degli arbitri.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function arbitri_statistiche_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.arbitri_statistiche':
+      $output = '';
+      $output .= '<h3>' . t('Statistiche Arbitri') . '</h3>';
+      $output .= '<p>' . t('Modulo per visualizzare le statistiche degli arbitri.') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function arbitri_statistiche_menu() {
+  $items = [];
+  
+  $items['statistiche-arbitri'] = [
+    'title' => 'Statistiche Arbitri',
+    'page callback' => 'arbitri_statistiche_page',
+    'access callback' => TRUE, // Pagina pubblica
+    'type' => MENU_CALLBACK,
+  ];
+  
+  return $items;
+}
+
+/**
+ * Page callback per la pagina delle statistiche.
+ */
+function arbitri_statistiche_page() {
+  // Carica il form di selezione
+//   $form = \Drupal::formBuilder()->getForm('Drupal\arbitro_statistiche\Form\SelezioneArbitriForm');
+  
+//   // Output del form
+//   $output = [
+//     'form' => $form,
+//   ];
+  
+//   // Se è stato selezionato un arbitro, mostra le statistiche
+//   $arbitro_id = \Drupal::request()->query->get('arbitro');
+//   if ($arbitro_id) {
+//     $statistiche = _arbitri_statistiche_get_statistiche($arbitro_id);
+//     if ($statistiche) {
+//       $output['statistiche'] = [
+//         '#markup' => $statistiche,
+//         '#prefix' => '<div id="statistiche-arbitro">',
+//         '#suffix' => '</div>',
+//       ];
+//     }
+//   }
+  
+//   return $output;
+}
+
+/**
+ * Recupera le statistiche di un arbitro.
+ */
+function _arbitri_statistiche_get_statistiche($arbitro_id) {
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  $arbitro = $node_storage->load($arbitro_id);
+  
+ dump($arbitro);
+  
+  // Recupera i campi del content type match
+  $nome = $arbitro->getTitle();
+  $partite_arbitrate = $arbitro->get('field_partite_arbitrate')->value ?? '0';
+  $cartellini_gialli = $arbitro->get('field_cartellini_gialli')->value ?? '0';
+  $cartellini_rossi = $arbitro->get('field_cartellini_rossi')->value ?? '0';
+  $calci_di_rigore = $arbitro->get('field_calci_di_rigore')->value ?? '0';
+  $media_voti = $arbitro->get('field_media_voti')->value ?? '0';
+  
+//   // Costruisci l'output delle statistiche
+//   $output = '<div class="statistiche-arbitro">';
+//   $output .= '<h2>Statistiche di ' . $nome . '</h2>';
+//   $output .= '<div class="statistiche-grid">';
+//   $output .= '<div class="statistica-item"><strong>Partite arbitrate:</strong> ' . $partite_arbitrate . '</div>';
+//   $output .= '<div class="statistica-item"><strong>Cartellini gialli:</strong> ' . $cartellini_gialli . '</div>';
+//   $output .= '<div class="statistica-item"><strong>Cartellini rossi:</strong> ' . $cartellini_rossi . '</div>';
+//   $output .= '<div class="statistica-item"><strong>Calci di rigore:</strong> ' . $calci_di_rigore . '</div>';
+//   $output .= '<div class="statistica-item"><strong>Media voti:</strong> ' . $media_voti . '</div>';
+//   $output .= '</div>';
+//   $output .= '</div>';
+  
+  return $output;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function arbitro_statistiche_theme($existing, $type, $theme, $path) {
+  return [
+    'arbitri_stats_page' => [
+      'variables' => [
+        'content' => NULL,
+        'stat' => NULL
+      ],
+      'template' => 'arbitri-stats-page',
+      'path' => 'modules/custom/arbitro_statistiche/templates',
+    ],
+  ];
+}

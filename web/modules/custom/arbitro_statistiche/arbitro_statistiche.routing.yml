@@ -1,0 +1,7 @@
+arbitro_statistiche.page:
+  path: '/arbitri-statistiche'
+  defaults:
+    _controller: '\Drupal\arbitro_statistiche\Controller\Statistiche::content'
+    _title: 'Statistiche Arbitri'
+  requirements:
+    _permission: 'access content'  # Pagina pubblica

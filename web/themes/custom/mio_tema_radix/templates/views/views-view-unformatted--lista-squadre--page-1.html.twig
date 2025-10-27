@@ -33,50 +33,68 @@
 */
 #}
 {% block views_unformatted_title %}
-{% if title %}
-{%
-include 'radix:heading' with {
-heading_html_tag: 'h3',
-content: title
-}
-%}
-{% endif %}
+  {% if title %}
+    <div class="container my-5">
+      <h1 class="fw-bold mb-4 text-center">{{ title }}</h1>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block views_unformatted_rows %}
+  <div class="container my-4">
+    <div class="row g-4 justify-content-center">
+      {% for row in rows %}
+        {% set _entity = row.content['#row']._entity %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card shadow-sm border-0 h-100 hover-card">
+            
+            {% if _entity.field_image.target_id %}
+              {% set file = drupal_entity('file', _entity.field_image.target_id) %}
+              <img 
+                src="{{ file_url(file['#file'].uri.value) }}" 
+                alt="{{ _entity.field_image.value[0].alt ?? _entity.title.value }}" 
+                class="card-img-top img-fluid rounded-top"
+              >
+            {% else %}
+              <div class="bg-light text-center py-5 text-muted">Nessuna immagine</div>
+            {% endif %}
+            
+            <div class="card-body">
+              <h5 class="card-title text-primary fw-bold mb-2">
+                {{ _entity.field_nome.value }}
+              </h5>
+              
+              {% if _entity.field_stadio.value %}
+                <p class="card-text mb-2">
+                  🏟️ <strong>Stadio:</strong> {{ _entity.field_stadio.value }}
+                </p>
+              {% endif %}
+              
+              {% if _entity.field_rosa.value[0].uri %}
+                <p class="mb-1">
+                  📄 <a href="{{ _entity.field_rosa.value[0].uri }}" target="_blank" class="link-primary text-decoration-none">
+                    Rosa giocatori
+                  </a>
+                </p>
+              {% endif %}
+              
+              {% if _entity.field_statistiche.value[0].uri %}
+                <p class="mb-0">
+                  📊 <a href="{{ _entity.field_statistiche.value[0].uri }}" target="_blank" class="link-secondary text-decoration-none">
+                    Statistiche squadra
+                  </a>
+                </p>
+              {% endif %}
+              {% if _entity.field_inno.target_id %}
+                {% set media = drupal_entity('media', _entity.field_inno.target_id) %}
+                 {{ media|render }}
+              {% endif %}
 
-{% for row in rows %}
-{%
-set row_classes = [
-default_row_class ? 'views-row view-row-match',
-]|merge(row_utility_classes ?: [])
-%}
 
-{% set _entity = row.content['#row']._entity %}
-<div{{row.attributes.addClass(row_classes)}}>
-
-    <h3>
-        {{ _entity.title.value }}
-    </h3>
-  <div> {{ _entity.field_nome.value }} </div>
-  <div> {{ _entity.field_stadio.value }} </div>
-
-  {% if _entity.field_image.target_id %}
-    {% set file = drupal_entity('file', _entity.field_image.target_id) %}
-        <img 
-        src="{{ file_url(file['#file'].uri.value) }}" 
-        alt="{{ _entity.field_image.value[0].alt }}" 
-        class="img-fluid rounded"
-        >
-  {% endif %}
-
-{% if  _entity.field_rosa.value[0].uri %}
-
-
- <div>   <a href="{{_entity.field_rosa.value[0].uri}}" target="_blank">  link alla rosa </a> </div>
-{% endif %}
-
-
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-    {% endblock %}
+  </div>
+{% endblock %}

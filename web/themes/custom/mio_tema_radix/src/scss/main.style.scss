@@ -11,6 +11,533 @@
 @import "base/typography";
 
 
+/* Titoli */
 h3 {
-    color: lightblue;
+  color: black;
+}
+
+/* Margini righe */
+.views-row.view-row-squadre {
+  margin-bottom: 20px;
+}
+
+.views-row.view-row-match {
+  margin-bottom: 100px;
+}
+
+/* Contenitore generale del filtro */
+.view-lista-squadre .view-filters .views-exposed-form ,
+.view-lista-partite .view-filters.view-filters .views-exposed-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end; /* allinea il bottone alla base */
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Label "Categoria" */
+.view-lista-squadre .view-filters .views-exposed-form label.form-label,
+.view-lista-partite .view-filters .views-exposed-form label.form-label  {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  color: #222;
+}
+
+/* Select compatta (Radix + Bootstrap 5) */
+.view-lista-squadre .view-filters .views-exposed-form .form-select,
+.view-lista-squadre .view-filters .views-exposed-form .form-control 
+.view-lista-partite .view-filters .views-exposed-form .form-select,
+.view-lista-partite .view-filters .views-exposed-form .form-control{
+  height: 34px;              /* più bassa */
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border-color: #ccc;
+  min-width: 150px;
+}
+
+/* Bottone Apply */
+.view-lista-squadre .view-filters .views-exposed-form .form-actions ,
+.view-lista-partite .view-filters .views-exposed-form .form-actions{
+align-self: center;      /* forza allineamento in basso */
+}
+
+.view-lista-squadre .view-filters .views-exposed-form input.form-submit,
+.view-lista-partite .view-filters .views-exposed-form input.form-submit {
+  height: 34px;
+  line-height: 34px;
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  border-radius: 0.25rem;
+  background-color: #0d6efd;
+  border: none;
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.view-lista-squadre .view-filters .views-exposed-form input.form-submit:hover,
+.view-lista-partite .view-filters .views-exposed-form input.form-submit:hover{
+  background-color: #0b5ed7;
+}
+// _description-section.scss
+
+.description-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+}
+
+.description-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.description-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.description-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #4a5568;
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  strong {
+    color: #2d3748;
+    font-weight: 600;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+// Features Grid
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.feature-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  text-align: center;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.feature-description {
+  color: #718096;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+// Contact Section
+.contact-section {
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  border: 1px solid #e2e8f0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.contact-info {
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      margin-top: 0.5rem;
+      border-radius: 2px;
+    }
+  }
+  
+  p {
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.subscribe-form {
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      margin-top: 0.5rem;
+      border-radius: 2px;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+  
+  &:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+}
+
+.btn-subscribe {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  }
+}
+
+// Startup Badge
+.startup-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #fed7e2, #fbb6ce);
+  color: #702459;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  
+  &::before {
+    content: '🚀';
+    margin-right: 0.5rem;
+  }
+}
+
+// Stats
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.stat-item {
+  text-align: center;
+  
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #667eea;
+    display: block;
+  }
+  
+  .stat-label {
+    font-size: 0.875rem;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+
+/* Stili base per il login */
+.user-login-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.user-login-form .form-label {
+  color: #2d3748;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.user-login-form .form-control {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  
+  &:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+}
+
+.user-login-form .btn-primary {
+  background: #667eea;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  
+  &:hover {
+    background: #5a67d8;
+  }
+}
+.login-form-container {
+  position: relative;
+}
+
+.user-login-form {
+  .form-footer {
+    margin-top: 1rem;
+  }
+  
+  .login-links {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    li {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .request-password-link {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      
+      &:hover {
+        color: #5a67d8;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* NASCONDI TEST!!!! */
+*:contains("TEST!!!!") {
+  display: none !important;
+}
+
+/* ALLINEA RESET PASSWORD */
+.block--mio-tema-radix-userlogin .item-list {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.block--mio-tema-radix-userlogin .item-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.block--mio-tema-radix-userlogin .request-password-link {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.block--mio-tema-radix-userlogin .request-password-link:hover {
+  text-decoration: underline;
+}
+
+/* MIGLIORA IL FORM DI LOGIN */
+.user-login-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.user-login-form .form-label {
+  color: #2d3748;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.user-login-form .form-control {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  margin-bottom: 1rem;
+  
+  &:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+  }
+}
+
+.user-login-form .btn-primary {
+  background: #667eea;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+  color: white;
+  
+  &:hover {
+    background: #5a67d8;
+  }
+}
+
+/* SISTEMA LA DESCRIZIONE SITO */
+.node--article--teaser .field--name-body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.node--article--teaser .field--name-body p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* SISTEMA LA NAVIGAZIONE */
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  color: #667eea;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #667eea;
+  border-radius: 5px;
+  
+  &:hover {
+    background: #667eea;
+    color: white;
+  }
 }

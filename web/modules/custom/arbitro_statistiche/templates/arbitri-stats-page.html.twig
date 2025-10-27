@@ -1,0 +1,37 @@
+<div class="arbitri-stats-page">
+  <div class="form-container">
+    {{ content.select_form }}
+  </div>
+
+  {% if stat %}
+    <h2>Statistiche Arbitro</h2>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Partita (NID)</th>
+          <th>Media Rigori</th>
+          <th>Media KM</th>
+          <th>Media Falli</th>
+          <th>Media Fuorigioco</th>
+          <th>Cartellini Gialli</th>
+          <th>Cartellini Rossi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in stat %}
+          <tr>
+            <td>{{ item.nid }}</td>
+            <td>{{ item.media_rigori }}</td>
+            <td>{{ item.media_km }}</td>
+            <td>{{ item.media_falli }}</td>
+            <td>{{ item.media_fuorigiochi }}</td>
+            <td>{{ item.cartellini_gialli }}</td>
+            <td>{{ item.cartellini_rossi }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Seleziona un arbitro per visualizzare le statistiche.</p>
+  {% endif %}
+</div>

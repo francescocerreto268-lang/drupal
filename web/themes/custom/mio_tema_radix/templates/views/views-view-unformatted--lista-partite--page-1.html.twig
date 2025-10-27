@@ -33,42 +33,101 @@
 */
 #}
 {% block views_unformatted_title %}
-{% if title %}
-{%
-include 'radix:heading' with {
-heading_html_tag: 'h3',
-content: title
-}
-%}
-{% endif %}
+  {% if title %}
+    <div class="container my-5">
+      <h1 class="fw-bold mb-4 text-center">{{ title }}</h1>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block views_unformatted_rows %}
+  <div class="container my-4">
+    <div class="row g-4 justify-content-center">
+      {% for row in rows %}
+        {% set _entity = row.content['#row']._entity %}
 
-{% for row in rows %}
-{%
-set row_classes = [
-default_row_class ? 'views-row view-row-match',
-]|merge(row_utility_classes ?: [])
-%}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card shadow-sm border-0 h-100 hover-card">
+            <div class="card-body">
 
-{% set _entity = row.content['#row']._entity %}
-<div{{row.attributes.addClass(row_classes)}}>
+              <h5 class="card-title text-uppercase text-primary fw-bold mb-3">
+                {{ _entity.title.value }}
+              </h5>
+              {% if _entity.field_serie.entity is defined %}
+        <div class="mb-2 text-center">
+          <span class="badge bg-secondary text-light px-3 py-2">
+             {{ _entity.field_serie.entity.name.value }}
+             </span>
+        </div>
+            {% endif %}
+              <div class="mb-2">
+                <strong>{{ _entity.field_squadra_1.entity.field_nome.value }}</strong>
+                <span class="text-muted">vs</span>
+                <strong>{{ _entity.field_squadra_2.entity.field_nome.value }}</strong>
+              </div>
 
-    <h3>
-        {{ _entity.title.value }}
-    </h3>
+              <div class="small text-muted mb-3">
+                📍 {{ _entity.field_indirizzo.value }}<br>
+                🗓️ {{ _entity.field_dara_e_ora.value | date('d/m/Y H:i') }}
+              </div>
 
-    <div> 
-        <strong>{{ _entity.field_squadra_1.entity.field_nome.value }}</strong> VS 
-        <strong>{{
-            _entity.field_squadra_2.entity.field_nome.value }}</strong> 
+              <hr class="my-2">
+
+              <div class="row text-center">
+                <div class="col">
+                  <div class="fw-bold fs-5 text-success">{{ _entity.field_gol_casa.value }}</div>
+                  <small class="text-muted">Gol Casa</small>
+                </div>
+                <div class="col">
+                  <div class="fw-bold fs-5 text-danger">{{ _entity.field_gol_ospite.value }}</div>
+                  <small class="text-muted">Gol Ospiti</small>
+                </div>
+              </div>
+
+              <hr class="my-3">
+
+              <div class="d-flex justify-content-between flex-wrap text-center">
+                <div class="stat-item">
+                  ⚽ <span class="fw-bold">{{ _entity.field_rigori.value }}</span>
+                  <small class="d-block text-muted">Rigori</small>
+                </div>
+                <div class="stat-item">
+                  🚩 <span class="fw-bold">{{ _entity.field_fuorigiochi_fischiati.value }}</span>
+                  <small class="d-block text-muted">Fuorigiochi</small>
+                </div>
+                <div class="stat-item">
+                  🔔 <span class="fw-bold">{{ _entity.field_falli_fischiati.value }}</span>
+                  <small class="d-block text-muted">Falli</small>
+                </div>
+                <div class="stat-item">
+                  🏃 <span class="fw-bold">{{ _entity.field_km_percorsi.value }}</span> km
+                  <small class="d-block text-muted">Percorsi</small>
+                </div>
+              </div>
+
+              <hr class="my-3">
+
+              <p class="mb-1">
+                💰 <strong>Pagamento:</strong> {{ _entity.field_pagamento.value }} €
+              </p>
+              <p class="mb-1">
+                💰 <strong>Note partita:</strong> {{ _entity.field_note_generali.value }} 
+              </p>
+
+              <p class="text-muted mb-0">
+  👨‍⚖️ Arbitro: 
+  <a href="http://my-project.ddev.site/user/{{ _entity.field_arbitro.entity.id }}">
+    {{ _entity.field_arbitro.entity.field_nome.value | capitalize }}
+    {{ _entity.field_arbitro.entity.field_cognome.value | capitalize }}
+  </a>
+</p>
+
+
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-
-    <div> {{ _entity.field_indirizzo.value }}</div>
-    <div> {{ _entity.field_dara_e_ora.value | date('d/m/Y H:i') }}</div>
-
-    <div> {{ _entity.field_arbitro.entity.field_nome.value | capitalize   }} {{ _entity.field_arbitro.entity.field_cognome.value  | capitalize    }} </div>
-    </div>
-    {% endfor %}
-    {% endblock %}
+  </div>
+{% endblock %}

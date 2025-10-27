@@ -1,0 +1,7 @@
+user_partite_block.stats:
+  path: '/statistiche-arbitri'
+  defaults:
+    _controller: '\Drupal\user_partite_block\Controller\UserPartiteController::statsPage'
+    _title: 'Statistiche Arbitri'
+  requirements:
+    _permission: 'access content'

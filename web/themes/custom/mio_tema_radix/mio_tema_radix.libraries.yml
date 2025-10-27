@@ -59,3 +59,9 @@ jquery.validate:
     src/js/overrides/validate.js: {}
   dependencies:
     - core/jquery
+
+# ✅ Aggiungi la nuova libreria separata qui
+login-form:
+  css:
+    theme:
+      css/components/login-form.css: {}

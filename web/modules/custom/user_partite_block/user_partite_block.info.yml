@@ -1,0 +1,7 @@
+name: 'User Partite Block'
+type: module
+description: 'Modulo di test per blocco user partite.'
+core_version_requirement: ^11
+package: Custom
+dependencies:
+  - drupal:user
